@@ -50,6 +50,9 @@ opt.updatetime = 250
 opt.whichwrap:append "<>[]hl"
 g.mapleader = " "
 
+-- set gui options
+opt.guifont = "JetBrainsMono NF:h14"
+
 -- disable some builtin vim plugins
 
 local default_plugins = {
