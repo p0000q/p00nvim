@@ -121,11 +121,11 @@ M.lspconfig = function()
            i = { function() vim.lsp.buf.implementation() end, "implementation" },
            r = { function() vim.lsp.buf.references() end, "references"},
        },
-       K = { function() vim.lsp.buf.hover() end },
        ["C-k"] = { function() vim.lsp.buf.signature_help() end },
        ["<leader>ca"] = { function() vim.lsp.buf.code_acton() end, "code action"},
        ["<leader>cr"] = { function() vim.lsp.buf.rename() end, "rename"},
        ["<leader>cf"] = { function() vim.lsp.buf.formatting() end, "formatiting"},
+       ["<leader>k"] = { function() vim.lsp.buf.hover() end, "hover" },
   })
 end
 

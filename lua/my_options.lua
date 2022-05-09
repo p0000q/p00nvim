@@ -42,6 +42,9 @@ opt.termguicolors = true
 opt.timeoutlen = 100
 opt.undofile = true
 
+-- file encodings
+opt.fileencodings = "ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1"
+
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
 

@@ -93,7 +93,8 @@ lspconfig.sumneko_lua.setup {
 }
 
 lspconfig.clangd.setup{
-
+   on_attach = M.on_attach,
+   capabilities = capabilities,
 }
 
 return M
