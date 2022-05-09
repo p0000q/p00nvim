@@ -1,4 +1,9 @@
 local M = {}
+local present, wk = pcall(require, "which-key")
+if not present then
+    print("which-key cannot be loaded")
+    return M
+end
 
 local map = function(mode, keys, command, opt)
    local options = { silent = true }
@@ -46,6 +51,10 @@ map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-j>", "<C-w>j")
+wk.register({
+    ["<leader>wq"] = { "<cmd> :q <CR>", "quit window"},
+    ["<leader>wo"] = { "<cmd> :only <CR>", "only window"},
+})
 
 -- Add Packer commands because we are not loading it at startup
 
@@ -87,93 +96,37 @@ M.comment = function()
 end
 
 M.nvimtree = function()
-   map("n", "<C-n>", "<cmd> :NvimTreeToggle <CR>")
-   map("n", "<leader>e", "<cmd> :NvimTreeFocus <CR>")
+   wk.register({
+       ["<leader>e"] = {"<cmd> :NvimTreeToggle<CR>", "nvimtree"},
+   })
 end
 
 M.telescope = function()
-   map("n", "<leader>fb", "<cmd> :Telescope buffers <CR>")
-   map("n", "<leader>ff", "<cmd> :Telescope find_files <CR>")
-   map("n", "<leader>fa", "<cmd> :Telescope find_files follow=true no_ignore=true hidden=true <CR>")
-   map("n", "<leader>fh", "<cmd> :Telescope help_tags <CR>")
-   map("n", "<leader>fw", "<cmd> :Telescope live_grep <CR>")
-   map("n", "<leader>fo", "<cmd> :Telescope oldfiles <CR>")
-   map("n", "<leader>th", "<cmd> :Telescope themes <CR>")
-   map("n", "<leader>tk", "<cmd> :Telescope keymaps <CR>")
-
-   -- pick a hidden term
-   map("n", "<leader>W", "<cmd> :Telescope terms <CR>")
+    wk.register({
+        ["<leader>fb"] = { "<cmd> :Telescope buffers <CR>", "buffers"},
+        ["<leader>ff"] = { "<cmd> :Telescope find_files<CR>", "files"},
+        ["<leader>fh"] = { "<cmd> :Telescope help_tags<CR>", "tags"},
+        ["<leader>fw"] = { "<cmd> :Telescope live_grep<CR>", "tags"},
+        ["<leader>fs"] = { "<cmd> :Telescope grep_string<CR>", "tags"},
+    })
 end
 
 M.lspconfig = function()
    -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
-   map("n", "gD", function()
-      vim.lsp.buf.declaration()
-   end)
-
-   map("n", "gd", function()
-      vim.lsp.buf.definition()
-   end)
-
-   map("n", "K", function()
-      vim.lsp.buf.hover()
-   end)
-
-   map("n", "gi", function()
-      vim.lsp.buf.implementation()
-   end)
-
-   map("n", "<C-k>", function()
-      vim.lsp.buf.signature_help()
-   end)
-
-   map("n", "<leader>D", function()
-      vim.lsp.buf.type_definition()
-   end)
-
-   map("n", "<leader>ra", function()
-      vim.lsp.buf.rename()
-   end)
-
-   map("n", "<leader>ca", function()
-      vim.lsp.buf.code_action()
-   end)
-
-   map("n", "gr", function()
-      vim.lsp.buf.references()
-   end)
-
-   map("n", "<leader>f", function()
-      vim.diagnostic.open_float()
-   end)
-
-   map("n", "[d", function()
-      vim.diagnostic.goto_prev()
-   end)
-
-   map("n", "d]", function()
-      vim.diagnostic.goto_next()
-   end)
-
-   map("n", "<leader>q", function()
-      vim.diagnostic.setloclist()
-   end)
-
-   map("n", "<leader>fm", function()
-      vim.lsp.buf.formatting()
-   end)
-
-   map("n", "<leader>wa", function()
-      vim.lsp.buf.add_workspace_folder()
-   end)
-
-   map("n", "<leader>wr", function()
-      vim.lsp.buf.remove_workspace_folder()
-   end)
-
-   map("n", "<leader>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-   end)
+   wk.register({
+       g = {
+           name = "lsp-goto",
+           D = { function() vim.lsp.buf.declaration() end, "declaration"},
+           d = { function() vim.lsp.buf.definition() end, "definition"},
+           i = { function() vim.lsp.buf.implementation() end, "implementation" },
+           r = { function() vim.lsp.buf.references() end, "references"},
+       },
+       K = { function() vim.lsp.buf.hover() end },
+       ["C-k"] = { function() vim.lsp.buf.signature_help() end },
+       ["<leader>ca"] = { function() vim.lsp.buf.code_acton() end, "code action"},
+       ["<leader>cr"] = { function() vim.lsp.buf.rename() end, "rename"},
+       ["<leader>cf"] = { function() vim.lsp.buf.formatting() end, "formatiting"},
+  })
 end
 
 return M

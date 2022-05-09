@@ -65,6 +65,7 @@ end
 
 local plugins = {
     {"nvim-lua/plenary.nvim"},
+    {"kyazdani42/nvim-web-devicons"},
     {"lewis6991/impatient.nvim"},
 
     {
@@ -108,6 +109,17 @@ local plugins = {
    },
 
    {
+       "sindrets/diffview.nvim",
+       config = function()
+           local diffview = require "diffview"
+           diffview.setup {
+               diff_binaries = false,
+               use_icons = true,
+           }
+       end
+   },
+
+   {
        "NvChad/nvim-colorizer.lua",
       event = "BufRead",
       config = function()
@@ -140,15 +152,14 @@ local plugins = {
       config = function()
           require("my_lsp_config")
       end,
+      after = "nvim-lsp-installer",
    },
-
-   -- {
-   --     "andymass/vim-matchup",
-   --    opt = true,
-   --    setup = function()
-   --       packer_lazy_load "vim-matchup"
-   --    end,
-   -- },
+   {
+       "williamboman/nvim-lsp-installer",
+       config = function()
+           require("nvim-lsp-installer").setup{}
+       end
+   },
 
    -- load luasnips + cmp related in insert mode only
    {
