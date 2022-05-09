@@ -160,6 +160,12 @@ local plugins = {
            require("nvim-lsp-installer").setup{}
        end
    },
+   {
+       "simrat39/symbols-outline.nvim",
+       setup = function()
+           require("my_mappings").outline()
+       end
+   },
 
    -- load luasnips + cmp related in insert mode only
    {
@@ -306,8 +312,8 @@ local plugins = {
    {
        "folke/which-key.nvim",
        config = function()
-           local present, whichkey = pcall(require, "which-key")
-           if not present then
+           local presentW, whichkey = pcall(require, "which-key")
+           if not presentW then
                return
            end
            whichkey.setup{}

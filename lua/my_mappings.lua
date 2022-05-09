@@ -97,7 +97,13 @@ end
 
 M.nvimtree = function()
    wk.register({
-       ["<leader>e"] = {"<cmd> :NvimTreeToggle<CR>", "nvimtree"},
+       ["<leader>en"] = {"<cmd> :NvimTreeToggle<CR>", "nvimtree"},
+   })
+end
+
+M.outline = function()
+   wk.register({
+       ["<leader>eo"] = {"<cmd> :SymbolsOutline<CR>", "outline"},
    })
 end
 
@@ -116,13 +122,16 @@ M.lspconfig = function()
    wk.register({
        g = {
            name = "lsp-goto",
+           d = { "<cmd> :Telescope lsp_definitions<CR>", "definition"},
+           i = { "<cmd> :Telescope lsp_implementations<CR>", "definition"},
+           r = { "<cmd> :Telescope lsp_references<CR>", "definition"},
            D = { function() vim.lsp.buf.declaration() end, "declaration"},
-           d = { function() vim.lsp.buf.definition() end, "definition"},
-           i = { function() vim.lsp.buf.implementation() end, "implementation" },
-           r = { function() vim.lsp.buf.references() end, "references"},
+           -- d = { function() vim.lsp.buf.definition() end, "definition"},
+           -- i = { function() vim.lsp.buf.implementation() end, "implementation" },
+           -- r = { function() vim.lsp.buf.references() end, "references"},
        },
        ["C-k"] = { function() vim.lsp.buf.signature_help() end },
-       ["<leader>ca"] = { function() vim.lsp.buf.code_acton() end, "code action"},
+       ["<leader>ca"] = { function() vim.lsp.buf.code_action() end, "code action"},
        ["<leader>cr"] = { function() vim.lsp.buf.rename() end, "rename"},
        ["<leader>cf"] = { function() vim.lsp.buf.formatting() end, "formatiting"},
        ["<leader>k"] = { function() vim.lsp.buf.hover() end, "hover" },
@@ -136,9 +145,9 @@ M.hopKeys = function()
     vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})
     vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
     vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
-    vim.api.nvim_set_keymap('n', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
-    vim.api.nvim_set_keymap('v', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
-    vim.api.nvim_set_keymap('o', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>", {})
+    -- vim.api.nvim_set_keymap('n', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
+    -- vim.api.nvim_set_keymap('v', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
+    -- vim.api.nvim_set_keymap('o', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>", {})
 end
         -- ["<leader>fs"] = { "<cmd> :Telescope grep_string<CR>", "tags"},
     wk.register({
