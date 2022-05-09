@@ -222,6 +222,24 @@ local plugins = {
       after = "cmp-buffer",
    },
 
+   {
+       "hrsh7th/cmp-cmdline",
+      after = "cmp-buffer",
+      config = function()
+          local cc  = require("cmp")
+          cc.setup.cmdline(":", {
+              sources = {
+                  { name = "cmdline" }
+              }
+          })
+          cc.setup.cmdline("/", {
+              sources = {
+                  { name = "buffer" }
+              }
+          })
+      end,
+   },
+
    -- misc plugins
    {
        "windwp/nvim-autopairs",
@@ -293,6 +311,15 @@ local plugins = {
                return
            end
            whichkey.setup{}
+       end
+   },
+
+   {
+       "phaazon/hop.nvim",
+       branch = "v1",
+       config = function()
+           require("my_mappings").hopKeys()
+           require("hop").setup{}
        end
    },
 
