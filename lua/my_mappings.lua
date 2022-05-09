@@ -90,6 +90,13 @@ user_cmd("PackerUpdate", packer_cmd "update", {})
 
 -- --------------------- plugin mappings below
 
+M.gitConfig = function()
+   wk.register({
+       ["<leader>gd"] = {"<cmd> :DiffviewOpen<CR>", "git diff view"},
+       ["<leader>gh"] = {"<cmd> :DiffviewFileHistory<CR>", "git file history"},
+   })
+end
+
 M.comment = function()
    map("n", "<leader>/", "<cmd> :lua require('Comment.api').toggle_current_linewise()<CR>")
    map("v", "<leader>/", "<esc><cmd> :lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>")
@@ -123,9 +130,10 @@ M.lspconfig = function()
        g = {
            name = "lsp-goto",
            d = { "<cmd> :Telescope lsp_definitions<CR>", "definition"},
-           i = { "<cmd> :Telescope lsp_implementations<CR>", "definition"},
-           r = { "<cmd> :Telescope lsp_references<CR>", "definition"},
+           i = { "<cmd> :Telescope lsp_implementations<CR>", "implementations"},
+           r = { "<cmd> :Telescope lsp_references<CR>", "references"},
            D = { function() vim.lsp.buf.declaration() end, "declaration"},
+           t = { "<cmd> :Telescope lsp_type_definitions<CR>", "type definition"},
            -- d = { function() vim.lsp.buf.definition() end, "definition"},
            -- i = { function() vim.lsp.buf.implementation() end, "implementation" },
            -- r = { function() vim.lsp.buf.references() end, "references"},

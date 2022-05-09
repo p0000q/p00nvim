@@ -116,6 +116,7 @@ local plugins = {
                diff_binaries = false,
                use_icons = true,
            }
+           require("my_mappings").gitConfig()
        end
    },
 

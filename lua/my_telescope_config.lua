@@ -38,7 +38,7 @@ local options = {
       file_sorter = require("telescope.sorters").get_fuzzy_file,
       file_ignore_patterns = { "node_modules" },
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-      path_display = { "truncate" },
+      path_display = { "shorten" },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
@@ -53,13 +53,15 @@ local options = {
    },
 }
 
+-- local dropdown_theme = require("telescope.themes").get_dropdown{}
+-- telescope.setup(dropdown_theme)
 telescope.setup(options)
 
 -- load extensions
-local extensions = { "themes", "terms" }
-
-pcall(function()
-   for _, ext in ipairs(extensions) do
-      telescope.load_extension(ext)
-   end
-end)
+-- local extensions = { "themes", "terms" }
+--
+-- pcall(function()
+--    for _, ext in ipairs(extensions) do
+--       telescope.load_extension(ext)
+--    end
+-- end)
