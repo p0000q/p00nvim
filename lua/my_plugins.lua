@@ -332,6 +332,9 @@ local plugins = {
 
    {
        "dracula/vim",
+   },
+   {
+       "tpope/vim-surround",
    }
 }
 
