@@ -121,6 +121,7 @@ M.telescope = function()
         ["<leader>fh"] = { "<cmd> :Telescope help_tags<CR>", "tags"},
         ["<leader>fw"] = { "<cmd> :Telescope live_grep<CR>", "tags"},
         ["<leader>fs"] = { "<cmd> :Telescope grep_string<CR>", "tags"},
+        ["<leader>fp"] = { "<cmd> :Telescope session-lens search_session<CR>", "tags"},
     })
 end
 
